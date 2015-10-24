@@ -1,4 +1,4 @@
-package org.scilab.forge.jlatexmath.Control;
+package com.proudapes.Control;
 
 
 import com.sun.javafx.css.converters.PaintConverter;

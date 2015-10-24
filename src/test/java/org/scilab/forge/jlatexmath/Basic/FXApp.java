@@ -2,15 +2,9 @@ package org.scilab.forge.jlatexmath.Basic;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import org.scilab.forge.jlatexmath.Control.LateXMathControl;
+import com.proudapes.Control.LateXMathControl;
 
 public class FXApp extends Application {
     @Override

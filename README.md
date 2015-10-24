@@ -22,12 +22,12 @@ LatexMathControl is a styleable javafx control.
 
 The following properties control the visulaization
 
-|Property | Default | Purpose
+|Property | Default | CSS Property  Purpose
 |---------|------|--------
-|formula  |""    |The laTeX encoded formula
-|size     |Default javafx font size|Font scaling, default is equal to the javafx default size
-|bgColor  |Color.Transparant| Background Color
-|textColor|Color.BLACK|fill color of the Font
+|formula  |""    | fx-formula | The laTeX encoded formula
+|size     |Default javafx font size| fx-size | Font scaling, default is equal to the javafx default size
+|bgColor  |Color.Transparant| fx-bg | Background Color
+|textColor|Color.BLACK| fx-text-color | fill color of the Font
 
 
 ##Example
