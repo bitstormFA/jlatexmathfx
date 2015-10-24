@@ -1,0 +1,108 @@
+/* FcscoreBox.java
+ * =========================================================================
+ * This file is part of the JLaTeXMath Library - http://forge.scilab.org/jlatexmath
+ *
+ * Copyright (C) 2013 DENIZET Calixte
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or (at
+ * your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * A copy of the GNU General Public License can be found in the file
+ * LICENSE.txt provided with the source distribution of this program (see
+ * the META-INF directory in the source jar). This license can also be
+ * found on the GNU website at http://www.gnu.org/licenses/gpl.html.
+ *
+ * If you did not receive a copy of the GNU General Public License along
+ * with this program, contact the lead developer, or write to the Free
+ * Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+ * 02110-1301, USA.
+ *
+ */
+
+package org.scilab.forge.jlatexmath;
+
+
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.StrokeLineCap;
+import javafx.scene.shape.StrokeLineJoin;
+import javafx.scene.transform.Affine;
+
+/**
+ * A box representing glue.
+ */
+public class FcscoreBox extends Box {
+
+    private int N;
+    private boolean strike;
+    private double space;
+    private double thickness;
+
+    public FcscoreBox(int N, double h, double thickness, double space, boolean strike) {
+        this.N = N;
+        this.width = N * (thickness + space) + 2 * space;
+        this.height = h;
+        this.depth = 0;
+        this.strike = strike;
+        this.space = space;
+        this.thickness = thickness;
+    }
+
+    public void draw(GraphicsContext g2, double x, double y) {
+        Affine transf = g2.getTransform();
+        Paint oldStroke = g2.getStroke();
+
+
+        final double sx = transf.getMxx();
+        final double sy = transf.getMyy();
+        double s = 1;
+        if (sx == sy) {
+            // There are rounding problems due to scale factor: lines could have different
+            // spacing...
+            // So the increment (space+thickness) is done in using integer.
+            s = sx;
+            Affine t = transf.clone();
+            t.scale(1 / sx, 1 / sy);
+            g2.setTransform(t);
+        }
+
+        g2.setLineWidth(s * thickness);
+        g2.setLineCap(StrokeLineCap.BUTT);
+        g2.setLineJoin(StrokeLineJoin.MITER);
+
+        //g2.setStroke(new BasicStroke((double) (s * thickness), BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
+        double th = thickness / 2.f;
+        //final Line2D.double line = new Line2D.double();
+        double xx = x + space;
+        xx = (double) (xx * s + (space / 2.f) * s);
+        final int inc = (int) Math.round((space + thickness) * s);
+
+        for (int i = 0; i < N; i++) {
+            //line.setLine(xx + th * s, (y - height) * s, xx + th * s, y * s);
+            g2.strokeLine(xx + th * s, (y - height) * s, xx + th * s, y * s);
+            //g2.draw(line);
+            xx += inc;
+        }
+
+        if (strike) {
+
+            //line.setLine((x + space) * s, (y - height / 2.f) * s, xx - s * space / 2, (y - height / 2.f) * s);
+            //g2.draw(line);
+            g2.strokeLine((x + space) * s, (y - height / 2.f) * s, xx - s * space / 2, (y - height / 2.f) * s);
+        }
+
+        g2.setTransform(transf);
+        g2.setStroke(oldStroke);
+    }
+
+    public int getLastFontId() {
+        return TeXFont.NO_FONT;
+    }
+}

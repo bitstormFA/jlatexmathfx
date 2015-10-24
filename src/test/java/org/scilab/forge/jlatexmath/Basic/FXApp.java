@@ -1,40 +1,16 @@
-# jlatexmathfx general Information
-jlatexmathfx is a port of [jlatexmath](http://forge.scilab.org/index.php/p/jlatexmath/) to javafx
+package org.scilab.forge.jlatexmath.Basic;
 
-The control is usable but *not thoroughly* tested.
-
-The performance has not been optimized but is acceptable on local tests. Upon first use initialization will happen but 
-subsequent calls will be faster.
-
-# Version
-0.3
-
-# Building the project
-The project uses [gradle](http://www.gradle.org) as build tool.
-To generate the jar use:
-
-```
-gradle assemble
-```
-
-#Usage
-LatexMathControl is a styleable javafx control. 
-
-The following properties control the visulaization
-
-|Property | Default | Purpose
-|---------|------|--------
-|formula  |""    |The laTeX encoded formula
-|size     |Default javafx font size|Font scaling, default is equal to the javafx default size
-|bgColor  |Color.Transparant| Background Color
-|textColor|Color.BLACK|fill color of the Font
-
-
-##Example
-
-This example has been adapted from the origial swing based distribution
-
-```
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import org.scilab.forge.jlatexmath.Control.LateXMathControl;
 
 public class FXApp extends Application {
     @Override
@@ -50,9 +26,27 @@ public class FXApp extends Application {
         latex += "\\begin{array}{rl} s &= \\int_a^b\\left\\|\\frac{d}{dt}\\vec{r}\\,(u(t),v(t))\\right\\|\\,dt \\\\ &= \\int_a^b \\sqrt{u'(t)^2\\,\\vec{r}_u\\cdot\\vec{r}_u + 2u'(t)v'(t)\\, \\vec{r}_u\\cdot\\vec{r}_v+ v'(t)^2\\,\\vec{r}_v\\cdot\\vec{r}_v}\\,\\,\\, dt. \\end{array}\\\\";
         latex += "\\end{array}";
 
+        VBox pane=new VBox();
         LateXMathControl lc=new LateXMathControl(latex);
-        StackPane pane=new StackPane();
-        pane.getChildren().add(lc);
+        lc.setSize(12);
+
+
+        String latex2 = "\\begin{array}{|c|l|||r|c|}";
+        latex2 += "\\hline";
+        latex2 += "\\text{Matrix}&\\multicolumn{2}{|c|}{\\text{Multicolumns}}&\\text{Font sizes commands}\\cr";
+        latex2 += "\\hline";
+        latex2 += "\\begin{pmatrix}\\alpha_{11}&\\cdots&\\alpha_{1n}\\cr\\hdotsfor{3}\\cr\\alpha_{n1}&\\cdots&\\alpha_{nn}\\end{pmatrix}&\\Large \\text{Large Right}&\\small \\text{small Left}&\\tiny \\text{tiny Tiny}\\cr";
+        latex2 += "\\hline";
+        latex2 += "\\multicolumn{4}{|c|}{\\Huge \\text{Huge Multicolumns}}\\cr";
+        latex2 += "\\hline";
+        latex2 += "\\end{array}";
+
+        LateXMathControl lc2=new LateXMathControl(latex2);
+
+
+        lc2.setStyle("-fx-text-color: green; -fx-bg: lightgrey; -fx-size: 18");
+
+        pane.getChildren().addAll(lc,lc2);
 
         Scene scene=new Scene(pane);
         primaryStage.setScene(scene);
@@ -60,6 +54,8 @@ public class FXApp extends Application {
         primaryStage.setHeight(600);
 
         primaryStage.show();
+
+
     }
 
     public static void main(String[] args) {
@@ -67,11 +63,3 @@ public class FXApp extends Application {
     }
 
 }
-
-```
-
-#Avalability via Gradle or maven
-soon
-
-#License
-GPL V2
