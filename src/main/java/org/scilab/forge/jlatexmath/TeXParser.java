@@ -186,7 +186,7 @@ public class TeXParser {
     }
 
     /**
-     * Create a new TeXParser in the context of an array. When the parser meets a & a new atom is added in the current line and when a \\ is met, a new line is created.
+     * Create a new TeXParser in the context of an array. When the parser meets a and a new atom is added in the current line and when a \\ is met, a new line is created.
      *
      * @param isPartial   if true certains exceptions are not thrown
      * @param parseString the string to be parsed
@@ -200,7 +200,7 @@ public class TeXParser {
     }
 
     /**
-     * Create a new TeXParser in the context of an array. When the parser meets a & a new atom is added in the current line and when a \\ is met, a new line is created.
+     * Create a new TeXParser in the context of an array. When the parser meets a and a new atom is added in the current line and when a \\ is met, a new line is created.
      *
      * @param isPartial   if true certains exceptions are not thrown
      * @param parseString the string to be parsed
@@ -214,7 +214,7 @@ public class TeXParser {
     }
 
     /**
-     * Create a new TeXParser in the context of an array. When the parser meets a & a new atom is added in the current line and when a \\ is met, a new line is created.
+     * Create a new TeXParser in the context of an array. When the parser meets a and a new atom is added in the current line and when a \\ is met, a new line is created.
      *
      * @param parseString the string to be parsed
      * @param aoa         an ArrayOfAtoms where to put the elements

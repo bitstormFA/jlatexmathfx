@@ -62,6 +62,7 @@ public class Glue {
 
     /**
      * Name of this glue object.
+     * @return
      */
     public String getName() {
         return this.name;

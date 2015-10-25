@@ -78,7 +78,7 @@ public class FractionAtom extends Atom {
     }
 
     /**
-     * Depending on noDef, the given thickness and unit will be used (<-> the default
+     * Depending on noDef, the given thickness and unit will be used (the default
      * thickness).
      *
      * @param num   the numerator

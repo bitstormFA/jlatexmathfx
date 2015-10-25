@@ -410,6 +410,8 @@ public class TeXFormula {
 
     /**
      * Inserts an atom at the end of the current formula
+     * @param el The atom to insert into the formula
+     * @return the updated formula
      */
     public TeXFormula add(Atom el) {
         if (el != null) {
