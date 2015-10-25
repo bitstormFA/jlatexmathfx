@@ -52,7 +52,7 @@ artifacts {
 task copyTemplates(type: Copy) {
     from 'src/templates'
     into rootDir
-    filter(ReplaceTokens, tokens: [version: '2.3.1'])
+    filter(ReplaceTokens, tokens: [version: version])
 }
 
 uploadArchives {
