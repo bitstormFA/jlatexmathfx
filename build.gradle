@@ -1,12 +1,22 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'net.researchgate:gradle-release:2.3.0'
+    }
+}
+
 apply plugin: 'java'
 apply plugin: 'maven'
 apply plugin: 'signing'
+apply plugin: 'net.researchgate.release'
+
 
 sourceCompatibility = '1.8'
 targetCompatibility = '1.8'
 
-archivesBaseName = 'jlatexmathfx'
-version = '0.3'
+archivesBaseName = rootProject.name
 group = 'com.proudapes'
 
 repositories {
@@ -37,6 +47,47 @@ artifacts {
     archives javadocJar, sourcesJar
 }
 
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            pom.project {
+                name 'jlatexmathfx'
+                packaging 'jar'
+                description 'A custom javafx control to render latex formula'
+                url 'https://github.com/bitstormGER/jlatexmathfx'
+
+                scm {
+                    connection 'scm:git:https://github.com/bitstormGER/jlatexmathfx.git'
+                    developerConnection 'scm:git:https://github.com/bitstormGER/jlatexmathfx.git'
+                    url 'https://github.com/bitstormGER/jlatexmathfx.git'
+                }
+
+                licenses {
+                    license {
+                        name 'GNU General Public License, version 2'
+                        url 'https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id 'bitstormger'
+                    }
+                }
+            }
+        }
+    }
+}
 
 task wrapper(type: Wrapper) {
     gradleVersion = '2.8'
