@@ -7,7 +7,7 @@ The performance has not been optimized but is acceptable on local tests. Upon fi
 subsequent calls will be faster.
 
 # Version
-2.3.1
+@version@
 
 # Building the project
 The project uses [gradle](http://www.gradle.org) as build tool.
