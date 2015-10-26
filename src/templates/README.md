@@ -35,7 +35,7 @@ The following properties control the visulaization
 This example has been adapted from the origial swing based distribution.
 The code produces the following output
 
-![Example of a formula rendered with javafx](src/templates/Example.png)
+![Example of a formula rendered with javafx](src/templates/Example1.png)
 
 
 ```

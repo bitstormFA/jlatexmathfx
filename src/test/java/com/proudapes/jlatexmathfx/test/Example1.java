@@ -61,7 +61,7 @@ public class Example1 extends Application {
 
         TeXFormula formula = new TeXFormula(latex);
 
-        formula.createPNG(TeXConstants.STYLE_DISPLAY, 2.0, "Example.png", Color.WHITE, Color.BLACK);
+        formula.createPNG(TeXConstants.STYLE_DISPLAY, 2.0, "Example1.png", Color.WHITE, Color.BLACK);
 
         Platform.exit();
 

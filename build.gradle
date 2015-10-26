@@ -51,6 +51,7 @@ artifacts {
 
 task copyTemplates(type: Copy) {
     from 'src/templates'
+    include '*.md'
     into rootDir
     filter(ReplaceTokens, tokens: [version: version])
 }
