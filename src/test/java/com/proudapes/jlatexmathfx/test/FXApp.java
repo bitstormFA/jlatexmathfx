@@ -1,10 +1,10 @@
-package org.scilab.forge.jlatexmath.Basic;
+package com.proudapes.jlatexmathfx.test;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import com.proudapes.Control.LateXMathControl;
+import com.proudapes.jlatexmathfx.Control.LateXMathControl;
 
 public class FXApp extends Application {
     @Override
@@ -35,10 +35,10 @@ public class FXApp extends Application {
         latex2 += "\\hline";
         latex2 += "\\end{array}";
 
-        LateXMathControl lc2=new LateXMathControl(latex2);
+        LateXMathControl lc2=new LateXMathControl();
 
 
-        lc2.setStyle("-fx-text-color: green; -fx-bg: lightgrey; -fx-size: 18");
+        lc2.setStyle("-fx-text-color: green; -fx-bg: lightgrey; -fx-size: 18; -fx-formula: \""+latex2+"\"");
 
         pane.getChildren().addAll(lc,lc2);
 

@@ -32,7 +32,11 @@ The following properties control the visulaization
 
 ##Example
 
-This example has been adapted from the origial swing based distribution
+This example has been adapted from the origial swing based distribution.
+The code produces the following output
+
+![Example of a formula rendered with javafx](src/templates/Example.png)
+
 
 ```
 
@@ -69,6 +73,8 @@ public class FXApp extends Application {
 }
 
 ```
+
+
 
 #Avalability via Gradle or maven
 soon

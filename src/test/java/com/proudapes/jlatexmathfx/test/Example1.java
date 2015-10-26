@@ -1,4 +1,4 @@
-package org.scilab.forge.jlatexmath.Basic;
+package com.proudapes.jlatexmathfx.test;
 
 /* Example1.java
  * =========================================================================

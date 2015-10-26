@@ -1,4 +1,4 @@
-package com.proudapes.Control;
+package com.proudapes.jlatexmathfx.Control;
 
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;

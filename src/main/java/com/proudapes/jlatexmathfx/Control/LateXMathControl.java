@@ -1,4 +1,4 @@
-package com.proudapes.Control;
+package com.proudapes.jlatexmathfx.Control;
 
 
 import com.sun.javafx.css.converters.PaintConverter;
