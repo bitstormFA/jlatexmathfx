@@ -7,7 +7,7 @@ The performance has not been optimized but is acceptable on local tests. Upon fi
 subsequent calls will be faster.
 
 # Version
-0.3.1
+0.3.2
 
 # Building the project
 The project uses [gradle](http://www.gradle.org) as build tool.
@@ -77,7 +77,24 @@ public class FXApp extends Application {
 
 
 #Avalability via Gradle or maven
-soon
+
+
+## Maven dependency
+
+```
+<dependency>
+  <groupId>com.proudapes</groupId>
+  <artifactId>jlatexmathfx</artifactId>
+  <version>0.3.2</version>
+</dependency>
+```
+
+
+## Gradle dependency
+
+```
+compile group: 'com.proudapes', name: 'jlatexmathfx', version: '0.3.2'
+```
 
 #License
 GPL V2

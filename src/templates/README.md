@@ -77,7 +77,24 @@ public class FXApp extends Application {
 
 
 #Avalability via Gradle or maven
-soon
+
+
+## Maven dependency
+
+```
+<dependency>
+  <groupId>com.proudapes</groupId>
+  <artifactId>jlatexmathfx</artifactId>
+  <version>@version@</version>
+</dependency>
+```
+
+
+## Gradle dependency
+
+```
+compile group: 'com.proudapes', name: 'jlatexmathfx', version: '@version@'
+```
 
 #License
 GPL V2
