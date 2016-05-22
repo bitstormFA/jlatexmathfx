@@ -14,7 +14,7 @@ The project uses [gradle](http://www.gradle.org) as build tool.
 To generate the jar use:
 
 ```
-gradle assemble
+gradle jar
 ```
 
 #Usage
