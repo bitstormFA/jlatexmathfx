@@ -19,7 +19,7 @@ To generate the jar use:
 maven package
 ```
 
-#Usage
+# Usage
 LatexMathControl is a styleable javafx control. 
 
 The following properties control the visulaization
@@ -32,7 +32,7 @@ The following properties control the visulaization
 |textColor|Color.BLACK| fx-text-color | fill color of the Font
 
 
-##Example
+## Example
 
 This example has been adapted from the origial swing based distribution.
 The code produces the following output
@@ -78,7 +78,7 @@ public class FXApp extends Application {
 
 
 
-#Avalability via Gradle or maven
+# Avalability via Gradle or maven
 
 
 ## Maven dependency
