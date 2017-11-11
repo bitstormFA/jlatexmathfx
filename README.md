@@ -7,7 +7,9 @@ The performance has not been optimized but is acceptable on local tests. Upon fi
 subsequent calls will be faster.
 
 # Version
-0.3.2
+0.3.3
+ * This version fixes a bug in the size calculation and prevents throwing exception if setting a wrong formula.
+If the formula string cannot be parsed it will be set to \text{Invalid Formula}
 
 # Building the project
 The project uses [gradle](http://www.gradle.org) as build tool.
@@ -81,11 +83,48 @@ public class FXApp extends Application {
 
 ## Maven dependency
 
+Add the add the following repository and dependency
+``` 
+<?xml version="1.0" encoding="UTF-8" ?>
+<settings xsi:schemaLocation='http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd'
+          xmlns='http://maven.apache.org/SETTINGS/1.0.0' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'>
+    
+    <profiles>
+        <profile>
+            <repositories>
+                <repository>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                    <id>bintray-bitstormger-maven</id>
+                    <name>bintray</name>
+                    <url>https://dl.bintray.com/bitstormger/maven</url>
+                </repository>
+            </repositories>
+            <pluginRepositories>
+                <pluginRepository>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                    <id>bintray-bitstormger-maven</id>
+                    <name>bintray-plugins</name>
+                    <url>https://dl.bintray.com/bitstormger/maven</url>
+                </pluginRepository>
+            </pluginRepositories>
+            <id>bintray</id>
+        </profile>
+    </profiles>
+    <activeProfiles>
+        <activeProfile>bintray</activeProfile>
+    </activeProfiles>
+</settings>
+```
+
 ```
 <dependency>
   <groupId>com.proudapes</groupId>
   <artifactId>jlatexmathfx</artifactId>
-  <version>0.3.2</version>
+  <version>0.3.3</version>
 </dependency>
 ```
 

@@ -5,14 +5,46 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'net.researchgate:gradle-release:2.3.0'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
     }
 }
 
-apply plugin: 'java'
-apply plugin: 'maven'
-apply plugin: 'signing'
-apply plugin: 'net.researchgate.release'
+apply plugin: 'com.jfrog.bintray'
+
+allprojects {
+    repositories {
+        jcenter()
+    }
+    apply plugin: 'maven'
+    apply plugin: 'maven-publish'
+    apply plugin: 'java'
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from components.java
+            groupId 'com.proudapes'
+            artifactId 'jlatexmathfx'
+            artifact sourcesJar
+            artifact javadocJar
+            version '0.3.3'
+            pom.withXml {
+                asNode().dependencies.'*'.findAll() {
+                    it.scope.text() == 'runtime' && project.configurations.compile.allDependencies.find { dep ->
+                        dep.name == it.artifactId.text()
+                    }
+                }.each() {
+                    it.scope*.value = 'compile'
+                }
+            }
+        }
+    }
+}
+
+
+group = 'com.proudapes'
+version = '0.3.3'
 
 
 sourceCompatibility = '1.8'
@@ -30,12 +62,6 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
 
-
-signing {
-    required { isReleaseVersion && gradle.taskGraph.hasTask("uploadArchives") }
-    sign configurations.archives
-}
-
 task javadocJar(type: Jar) {
     classifier = 'javadoc'
     from javadoc
@@ -46,9 +72,6 @@ task sourcesJar(type: Jar) {
     from sourceSets.main.allSource
 }
 
-artifacts {
-    archives javadocJar, sourcesJar
-}
 
 task copyTemplates(type: Copy) {
     from 'src/templates'
@@ -57,50 +80,55 @@ task copyTemplates(type: Copy) {
     filter(ReplaceTokens, tokens: [version: version])
 }
 
-uploadArchives {
-    repositories {
-        mavenDeployer {
-            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
-
-            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
-                authentication(userName: hasProperty('ossrhUsername')?ossrhUsername:'', password: hasProperty('ossrhPassword')?ossrhPassword:'')
-            }
-
-            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
-                authentication(userName: hasProperty('ossrhUsername')?ossrhUsername:'', password: hasProperty('ossrhPassword')?ossrhPassword:'')
-            }
-
-            pom.project {
-                name 'jlatexmathfx'
-                packaging 'jar'
-                description 'A custom javafx control to render latex formula'
-                url 'https://github.com/bitstormGER/jlatexmathfx'
-
-                scm {
-                    connection 'scm:git:https://github.com/bitstormGER/jlatexmathfx.git'
-                    developerConnection 'scm:git:https://github.com/bitstormGER/jlatexmathfx.git'
-                    url 'https://github.com/bitstormGER/jlatexmathfx.git'
-                }
-
-                licenses {
-                    license {
-                        name 'GNU General Public License, version 2'
-                        url 'https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html'
-                    }
-                }
-
-                developers {
-                    developer {
-                        id 'bitstormger'
-                    }
-                }
-            }
+bintray {
+    user = System.getenv('BINTRAY_USER')
+    key = System.getenv('BINTRAY_KEY')
+    publications = ['maven']
+    publish = true
+    override = false
+    pkg {
+        version {
+            name = '0.3.3'
+            desc = 'patch release'
+            released  = new Date()
+            vcsTag = '0.3.3'
         }
+        repo = 'maven'
+        name = 'jlatexmathfx'
+        websiteUrl = 'https://github.com/bitstormGER/jlatexmathfx'
+        issueTrackerUrl = 'https://github.com/bitstormGER/jlatexmathfx/issues'
+        publicDownloadNumbers = true
+        licenses = ['GPL2']
+        vcsUrl = 'https://github.com/bitstormGER/jlatexmathfx.git'
+
     }
 }
+
+// Create the pom configuration:
+def pomConfig = {
+    licenses {
+        license {
+            name "GPL2"
+            url "https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html"
+            distribution "repo"
+        }
+    }
+    developers {
+        developer {
+            id "bitstormger"
+            name "bitstormger"
+            email "bitstorm@tutanota.com"
+        }
+    }
+
+    scm {
+        url "https://github.com/bitstormGER/jlatexmathfx"
+    }
+}
+
+
 
 task wrapper(type: Wrapper) {
     gradleVersion = '4.3.1'
 }
-
 
