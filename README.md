@@ -132,7 +132,7 @@ Add the add the following repository and dependency
 ## Gradle dependency
 
 ```
-compile group: 'com.proudapes', name: 'jlatexmathfx', version: '0.3.2'
+compile group: 'com.proudapes', name: 'jlatexmathfx', version: '0.3.3'
 ```
 
 #License
