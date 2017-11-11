@@ -12,11 +12,11 @@ subsequent calls will be faster.
 If the formula string cannot be parsed it will be set to \text{Invalid Formula}
 
 # Building the project
-The project uses [gradle](http://www.gradle.org) as build tool.
+The project uses maven as build tool.
 To generate the jar use:
 
 ```
-gradle jar
+maven package
 ```
 
 #Usage
@@ -135,5 +135,5 @@ Add the add the following repository and dependency
 compile group: 'com.proudapes', name: 'jlatexmathfx', version: '0.3.3'
 ```
 
-#License
+# License
 GPL V2
