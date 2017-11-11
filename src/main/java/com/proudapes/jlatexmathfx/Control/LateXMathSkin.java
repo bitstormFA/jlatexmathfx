@@ -5,6 +5,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.VPos;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.SkinBase;
+import org.scilab.forge.jlatexmath.ParseException;
 import org.scilab.forge.jlatexmath.TeXConstants;
 import org.scilab.forge.jlatexmath.TeXFormula;
 import org.scilab.forge.jlatexmath.TeXIcon;
@@ -42,9 +43,18 @@ public class LateXMathSkin extends SkinBase<LateXMathControl> {
     }
 
     protected void updateTeXIcon() {
-        TeXFormula teXFormula = new TeXFormula(getSkinnable().getFormula());
-        teXIcon= teXFormula.createTeXIcon(TeXConstants.STYLE_DISPLAY, getSkinnable().getSize()/11);
-        teXIcon.setInsets(new Insets(1, 1, 1, 1));
+        try {
+
+            TeXFormula teXFormula = new TeXFormula(getSkinnable().getFormula());
+            teXIcon = teXFormula.createTeXIcon(TeXConstants.STYLE_DISPLAY, getSkinnable().getSize() / 11);
+            teXIcon.setInsets(new Insets(1, 1, 1, 1));
+        }
+        catch (ParseException p) {
+            getSkinnable().setFormula("\\text{Invalid Formula}");
+            TeXFormula teXFormula = new TeXFormula(getSkinnable().getFormula());
+            teXIcon = teXFormula.createTeXIcon(TeXConstants.STYLE_DISPLAY, getSkinnable().getSize() / 11);
+            teXIcon.setInsets(new Insets(1, 1, 1, 1));
+        }
 
         getSkinnable().requestLayout();
     }
@@ -75,7 +85,7 @@ public class LateXMathSkin extends SkinBase<LateXMathControl> {
 
     @Override
     protected double computeMaxWidth(double height, double topInset, double rightInset, double bottomInset, double leftInset) {
-        return computePrefHeight(height, topInset, rightInset, bottomInset, leftInset);
+        return computePrefWidth(height, topInset, rightInset, bottomInset, leftInset);
     }
 
     @Override
